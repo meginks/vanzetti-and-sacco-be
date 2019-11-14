@@ -1,0 +1,25 @@
+{
+  "name": "vanzetti-and-sacco",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/meginks/vanzetti-and-sacco-be.git"
+  },
+  "author": "meginks",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/meginks/vanzetti-and-sacco-be/issues"
+  },
+  "homepage": "https://github.com/meginks/vanzetti-and-sacco-be#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "knex": "^0.20.1",
+    "node": "^13.1.0"
+  }
+}
