@@ -5,6 +5,7 @@ exports.up = function(knex) {
         table.string("shortTitle");
         table.text("description"); 
         table.date("dateCreated"); 
+        table.text("materialsUsed");
 })
 }
 
