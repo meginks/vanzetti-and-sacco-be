@@ -1,24 +1,24 @@
 const db = require('./dbConfig.js'); 
 
 module.exports = {
-    add,
-    findById,
-    update,
+    addPerson,
+    findPersonById,
+    updatePerson,
     removePerson, 
 }
-
-async function add(person) {
+// People Models
+async function addPerson(person) {
     const [id] = await db('people').insert(person).returning('id') // this makes work with postgres
     return findById(id);
 }
 
-function findById(id) {
+function findPersonById(id) {
     return db('people')
     .where({id})
     .first();
 }
 
-function update(id, changes) {
+function updatePerson(id, changes) {
     return db('people')
     .where({id})
     .update(changes);
