@@ -2,6 +2,7 @@ const db = require('./dbConfig.js');
 
 module.exports = {
     addPerson,
+    findPeople,
     findPersonById,
     updatePerson,
     removePerson, 
@@ -10,6 +11,10 @@ module.exports = {
 async function addPerson(person) {
     const [id] = await db('people').insert(person).returning('id') // this makes work with postgres
     return findById(id);
+}
+
+function findPeople() {
+    return db('people')
 }
 
 function findPersonById(id) {
