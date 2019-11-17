@@ -2,19 +2,19 @@ const express = require('express');
 const router = express.Router();
 const People = require('../models/models.js');
 
-router.get('/people', (req, res) => {
+router.get('/people', async (req, res) => {
     try {
-        const people = People.findPeople()
+        const people = await People.findPeople()
         res.status(200).json({people})
     }
     catch (error) {
-        res.status(500).json({error})
+        res.status(500).json({message: error.message})
     }
 }) 
 
-router.get('/person/:id', (req, res) => {
+router.get('/person/:id', async (req, res) => {
     try {
-        const person = People.findPersonById(req.params.id)
+        const person = await People.findPersonById(req.params.id)
         res.status(200).json({person}) 
     }
     catch (error) {
@@ -24,7 +24,7 @@ router.get('/person/:id', (req, res) => {
 
 router.post('/person', (req, res) => {
     try {
-        const newPerson = await addPerson(req.body)
+        const newPerson = addPerson(req.body)
         res.status(200).json(newPerson)
     }
     catch (error) {
@@ -51,3 +51,6 @@ router.delete('/person/:id', (req, res) => {
         res.status(500).json({error})
     }
 })
+
+
+module.exports = router;
