@@ -1,24 +1,24 @@
 exports.up = function(knex) {
-    return knex.schema.createTable('committee_members', table => {
+    return knex.schema.createTable('authors', table => {
             table.increments();
     
             table
-            .integer('member_id')
+            .integer('author_id')
             .references('id')
             .inTable('people')
             .onDelete('CASCADE')
             .onUpdate('CASCADE');
     
             table 
-            .integer('committee_id') 
+            .integer('text_id') 
             .references('id')
-            .inTable('committees')
+            .inTable('texts')
             .onDelete('CASCADE')
             .onUpdate('CASCADE')
     })
 };
     
 exports.down = function(knex) {
-        return knex.schema.dropTableIfExists('committee_members');
+        return knex.schema.dropTableIfExists('authors');
 };
     
