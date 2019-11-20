@@ -10,7 +10,7 @@ module.exports = {
 // People Models
 async function addPerson(person) {
     const [id] = await db('people').insert(person).returning('id') // this makes work with postgres
-    return findById(id);
+    return findPersonById(id);
 }
 
 function findPeople() {
