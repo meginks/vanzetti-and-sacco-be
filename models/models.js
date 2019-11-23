@@ -1,36 +1,37 @@
 const db = require('./dbConfig.js'); 
 
 module.exports = {
-    addPerson,
-    findPeople,
-    findPersonById,
-    updatePerson,
-    removePerson, 
-}
-// People Models
-async function addPerson(person) {
-    const [id] = await db('people').insert(person).returning('id') // this makes work with postgres
-    return findPersonById(id);
+    add, 
+    findAll,
+    findById,
+    update,
+    remove
 }
 
-function findPeople() {
-    return db('people')
+// add -- takes new data and table (string for table name)
+async function add(data, table) {
+    const [id] = await db(table).insert(data).returning('id') 
+    return findById(id, table);
 }
 
-function findPersonById(id) {
-    return db('people')
-    .where({id})
-    .first();
+// find All -- takes table name, returns everything
+function findAll(table) {
+    return db(table);
 }
 
-function updatePerson(id, changes) {
-    return db('people')
-    .where({id})
-    .update(changes);
+// find by id -- takes id and table name
+function findById(id, table) {
+    return db(table).where({id}).first()
 }
 
-async function removePerson(id) {
-    return db('people')
+// update -- takes id, changes to make, and table name
+function update(id, changes, table) {
+    return db(table).where({id}).update(changes)
+} 
+
+// delete  -- takes id and table name
+async function remove(id, table) {
+    return db(table)
     .where({id})
     .del();
 }

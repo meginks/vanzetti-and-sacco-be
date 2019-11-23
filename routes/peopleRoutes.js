@@ -1,10 +1,10 @@
 const express = require('express');
 const router = express.Router();
-const People = require('../models/models.js');
+const data = require('../models/models.js');
 
 router.get('/people', async (req, res) => {
     try {
-        const people = await People.findPeople()
+        const people = await data.findAll("people")
         res.status(200).json({people})
     }
     catch (error) {
@@ -14,7 +14,7 @@ router.get('/people', async (req, res) => {
 
 router.get('/people/:id', async (req, res) => {
     try {
-        const person = await People.findPersonById(req.params.id)
+        const person = await data.findById(req.params.id, "people")
         res.status(200).json(person) 
     }
     catch (error) {
@@ -24,7 +24,7 @@ router.get('/people/:id', async (req, res) => {
 
 router.post('/people', async (req, res) => {
     try {
-        const newPerson = await People.addPerson(req.body)
+        const newPerson = await data.add(req.body, "people")
         res.status(200).json(newPerson)
     }
     catch (error) {
@@ -34,7 +34,7 @@ router.post('/people', async (req, res) => {
 
 router.put('/people/:id', async (req, res) => {
     try {
-        let updatedPerson = await People.updatePerson(req.params.id, req.body) 
+        let updatedPerson = await data.update(req.params.id, req.body, "people") 
         res.status(200).json(updatedPerson)
     }
     catch (error) {
@@ -44,14 +44,12 @@ router.put('/people/:id', async (req, res) => {
 
 router.delete('/people/:id', (req, res) => {
     try {
-        let deletedPerson = People.removePerson(req.params.id) 
-        res.status(200).json(deletedPerson)
+        let deletedPerson = data.remove(req.params.id, "people") 
+        res.status(200).json({message: `The person with id ${req.params.id} has been successfully deleted.`})
     } 
     catch (error) {
         res.status(500).json({error: error.message})
     }
 })
-
-
 
 module.exports = router;
