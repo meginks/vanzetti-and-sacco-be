@@ -69,5 +69,4 @@ router.delete('/texts/:id', (req, res) => {
     }
 })
 
-
 module.exports = router;
